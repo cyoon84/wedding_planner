@@ -1,4 +1,5 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!DOCTYPE html>
+<html>
 	<head>
 		<title>Simon and Jenny's Wedding</title>
 		<style type="text/css">
