@@ -1,0 +1,51 @@
+/* TAGS START */
+body {
+	background-color: #EAEAEA;
+	font-family: Verdana;
+	font-size: 12px;
+}
+/* TAGS END */
+
+/* CLASS START */
+.container {
+	width			: 800px;
+	margin-right	: auto;
+	margin-left		: auto;
+	margin-top		: 50px; 
+	border			: solid #A0A0A0 1px;
+	background-color: #DDDDDD;
+	text-align		: center;
+}
+
+.login_form {
+	background-color: #CCCCCC;
+	margin-right	: auto;
+	margin-left		: auto;
+	margin-top 		: 50px;
+	border			: solid #A0A0A0 1px;
+	text-align		: center;
+	width 			: 400px;
+}
+
+.login_left {
+	float: left;
+	width: 100px;
+}
+.login_right {
+	float: right;
+	width: 300px;
+}
+.login_row {
+	width: 400px;
+	text-align: center;
+	height: 15px;
+	
+}
+.login_textfield {
+	width: 200px;
+}
+/* CLASS END */
+
+/* ID START */
+/* ID END */
+
