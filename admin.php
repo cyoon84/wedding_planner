@@ -1,3 +1,11 @@
+<?php include ('library.php');
+if (!check_login()) {
+	// redirect
+		$loc = 'Location: index.php';
+		header($loc);
+	}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,21 +17,22 @@
 <script src="js/bootstrap.js"></script>
 </head>
 <body>
-<div class="span10" id="adminOuter">
-	<h1> View Guests List </h1>
-	<div class="row">
-		<div class="span4">
-			<h3>Simon's guests</h3>
-		</div>
+<div class="navbar navbar-inverse">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Simon and Jenny's Wedding</a>
+    <ul class="nav">
+      <li class="active"><a href="#">Front Page</a></li>
+      <li><a href="#">View Bride's List</a></li>
+      <li><a href="#">View Groom's List</a></li>
+    </ul>
+  </div>
 
-		<div class="span4">
-			<h3>Jenny's guests</h3>
-		</div>
-	</div>
+	<div class="hero-unit span9" id="display">
+	  <h1>Admin Page</h1>
+	  <p>View bride / groom's guest lists here!</p>
+	  <p>
 
-	<div id="noShow" class="span8">
-		<h3>Not attending</h3>
+	  </p>
 	</div>
-</div>
 </body>
 </html>
