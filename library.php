@@ -21,6 +21,8 @@
 	define('ADMIN', 'Admin Page');
 	define('LOGINHEADING', 'RSVP');
 	define('REENTER', 'Invalid E-Mail Address or password. <br />Please try again.');
+	define('YES', 'Yes');
+	define('NO', 'No');
 	
 	/* Functions for Log In Start */
 
