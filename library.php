@@ -17,6 +17,8 @@
 	define('GR', 'Groom');
 	define('BR', 'Bride');
 	define('NOTATND', 'Not Attending');
+	define('REENTER', 'Invalid email address or password');
+	define('LOGINHEADING', 'RSVP');
 
 	/* Functions for Log In Start */
 

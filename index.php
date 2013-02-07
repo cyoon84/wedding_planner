@@ -79,13 +79,17 @@ else {
     <div class="container">
 
       <form class="form-signin" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading"><?php echo LOGINHEADING ?></h2>
         <input type="text" class="input-block-level" placeholder="Email address" name="uname" />
         <input type="password" class="input-block-level" placeholder="Password" name="pw" />
-        <button class="btn btn-large btn-primary" type="submit">Sign in</button>&nbsp;&nbsp;
-        <button class="btn btn-large btn-primary" type="submit">Create New</button>
+        <div class="btn-group">
+	        <button class="btn btn-large btn-primary" type="submit">Sign in</button>&nbsp;&nbsp;
+	        <button class="btn btn-large btn-primary" onclick="window.location.href='guest.php'">Create New</button>
+    	</div>
+        <span class="label label-important"><?php if (!$login_result && $_POST) {echo REENTER;} ?></span>
       </form>
     </div>
+    
     <?php print_footer(); ?>
     <script src="js/jquery.js"></script>
   </body>
