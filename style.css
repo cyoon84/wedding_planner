@@ -1,13 +1,23 @@
 /* TAGS START */
-body {
+/*body {
 	background-color: #EAEAEA;
 	font-family: Verdana;
 	font-size: 12px;
-}
+}*/
 /* TAGS END */
 
 /* CLASS START */
-.container {
+
+#adminOuter {
+	margin-left:20px;
+	margin-top:20px;
+}
+
+#noShow {
+	margin-left:0px;
+}
+
+/*.container {
 	width			: 800px;
 	margin-right	: auto;
 	margin-left		: auto;
@@ -15,7 +25,7 @@ body {
 	border			: solid #A0A0A0 1px;
 	background-color: #DDDDDD;
 	text-align		: center;
-}
+}*/
 
 .login_form {
 	background-color: #CCCCCC;
