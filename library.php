@@ -82,6 +82,9 @@
       	if ($id == 'groom') {
       		$menu_html = $menu_html."<li><a href='guest_list.php?id=bride'>View Bride's List</a></li><li class='active'><a href='guest_list.php?id=groom'>View Groom's List</a></li><li><a href='guest_list.php?id=noShow'>View No Show List</a></li>";	
       	}
+      	if ($id == 'noShow') {
+      		$menu_html = $menu_html."<li><a href='guest_list.php?id=bride'>View Bride's List</a></li><li><a href='guest_list.php?id=groom'>View Groom's List</a></li><li class='active'><a href='guest_list.php?id=noShow'>View No Show List</a></li>";		
+      	}
   		$menu_html = $menu_html. "</ul>";
   		$menu_html = $menu_html."<ul class='nav pull-right'><li><a href='logout.php'><i class='icon-off'></i>&nbsp;Logout</a></li></ul></div></div>";
   		return $menu_html;

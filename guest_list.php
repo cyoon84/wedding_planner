@@ -38,6 +38,9 @@ if (!check_login()) {
 	  		if ($id == 'groom') {
 	  			echo GR;
 	  		}
+	  		if ($id == 'noShow') {
+	  			echo NOTATND;
+	  		}
 	  	?>
 	  </small></h1>
 
