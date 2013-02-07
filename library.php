@@ -86,6 +86,7 @@
   		$menu_html = $menu_html."<ul class='nav pull-right'><li><a href='logout.php'><i class='icon-off'></i>&nbsp;Logout</a></li></ul></div></div>";
   		return $menu_html;
 	}
+	
 	function fillinTable($id) {
 		$sql = "select firstName, lastName, email, plusGuest, isVegetarian from weddingPlanner where reference = '$id' and isAttending = '1' and role = '1'";
 	  	$result = mysql_query($sql);
@@ -112,5 +113,27 @@
 	  		}
 	  	}
 	  	return $html_table_contents;
+	}
+
+	function validate() {
+		$content = "";
+		$flag = FALSE;
+		if (trim($_POST["fname"]) == "" || trim($_POST["lname"]) == "" || trim($_POST["emailadd"]) == "" || 
+			trim($_POST["pwd"]) == "" || trim($_POST["cpwd"]) == "" || trim($_POST["phone"]) == "") {
+			$content .= "Please fill in all fields.<br />";
+			$flag = TRUE;
+		}
+		if ($_POST["pwd"] != $_POST["cpwd"]) {
+			$content .= "Please confirm your password correctly.<br />";
+			$flag = TRUE;
+		}
+		if (!filter_var($_POST["emailadd"], FILTER_VALIDATE_EMAIL)) {
+			$content .= "Please enter a valid email address.<br />";
+			$flag = TRUE;
+		}
+		if ($flag)
+			return $content;
+		else
+			return NULL;
 	}
 ?>
