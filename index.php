@@ -52,7 +52,10 @@ else {
 					<button class="btn btn-large btn-primary" type="submit">Sign in</button>&nbsp;&nbsp;
 					<a href="guest.php" class="btn btn-large btn-primary">Create New</a>
 				</div>
-				<span class="label label-important"><?php if (!$login_result && $_POST) {echo REENTER;} ?></span>
+				<?php if (!$login_result && $_POST) { ?>
+				<div>&nbsp;</div>
+				<div class="alert alert-error"><small><?php echo REENTER; ?></small></div>
+				<?php } ?>
 			</form>
 		</div>
     
