@@ -93,7 +93,22 @@
 	  	if ($result) {
 	  		while ($row = mysql_fetch_array($result)) {
 	  			$name = $row['lastName'].",".$row['firstName'];
-	  			$html_table_contents = $html_table_contents."<tr><td>".$name."</td><td>".$row['email']."</td><td>".$row['plusGuest']."</td><td>".$row['isVegetarian']."</td><td></tr>";
+	  			$guest = '';
+	  			$isVegetarian = '';
+
+	  			if ($row['plusGuest'] == '1') {
+	  				$guest = YES;
+	  			} else {
+	  				$guest = NO;
+	  			}
+
+	  			if ($row['isVegetarian'] == '1') {
+	  				$isVegetarian = YES;
+	  			} else {
+	  				$isVegetarian = NO;
+	  			}
+
+	  			$html_table_contents = $html_table_contents."<tr><td>".$name."</td><td>".$row['email']."</td><td>".$guest."</td><td>".$isVegetarian."</td><td></tr>";
 	  		}
 	  	}
 	  	return $html_table_contents;
