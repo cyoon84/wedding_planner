@@ -77,10 +77,10 @@
 		$menu_html =  "<div class='navbar-inner'><div class='container'><a class='brand' href='admin.php'>Simon and Jenny's Wedding</a><ul class='nav'><li><a href='admin.php'>Front Page</a></li>";
 
 		if ($id == 'bride') {
-      		$menu_html = $menu_html."<li class='active'><a href='guest_list.php?id=bride'>View Bride's List</a></li><li><a href='guest_list.php?id=groom'>View Groom's List</a></li><li><a href='#'>View No Show List</a></li>";
+      		$menu_html = $menu_html."<li class='active'><a href='guest_list.php?id=bride'>View Bride's List</a></li><li><a href='guest_list.php?id=groom'>View Groom's List</a></li><li><a href='guest_list.php?id=noShow'>View No Show List</a></li>";
       	}
       	if ($id == 'groom') {
-      		$menu_html = $menu_html."<li><a href='guest_list.php?id=bride'>View Bride's List</a></li><li class='active'><a href='guest_list.php?id=groom'>View Groom's List</a></li><li><a href='#'>View No Show List</a></li>";	
+      		$menu_html = $menu_html."<li><a href='guest_list.php?id=bride'>View Bride's List</a></li><li class='active'><a href='guest_list.php?id=groom'>View Groom's List</a></li><li><a href='guest_list.php?id=noShow'>View No Show List</a></li>";	
       	}
   		$menu_html = $menu_html. "</ul>";
   		$menu_html = $menu_html."<ul class='nav pull-right'><li><a href='logout.php'><i class='icon-off'></i>&nbsp;Logout</a></li></ul></div></div>";
