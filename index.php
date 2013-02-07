@@ -2,13 +2,14 @@
 $login_result = false;
 
 if ($_POST) {
-	if($login_result = login_to_db($_POST["uname"], $_POST["pw"])) {
+	if($login_result = login_to_db($_POST["uname"], $_POST["pw"]))
 		mysql_close($db_con);
-	}
 }
-if ($login_result && !$_SESSION["role"]) {
+if ($login_result && !$_SESSION["role"])
 	header("Location: admin.php");
-} else {
+else if ($login_result && $_SESSION["role"])
+	header("Location: guest.php");
+else {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,13 +82,11 @@ if ($login_result && !$_SESSION["role"]) {
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="text" class="input-block-level" placeholder="Email address" name="uname" />
         <input type="password" class="input-block-level" placeholder="Password" name="pw" />
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
         <button class="btn btn-large btn-primary" type="submit">Sign in</button>&nbsp;&nbsp;
         <button class="btn btn-large btn-primary" type="submit">Create New</button>
       </form>
     </div>
+    <?php print_footer(); ?>
     <script src="js/jquery.js"></script>
   </body>
 </html>

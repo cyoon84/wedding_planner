@@ -22,10 +22,6 @@
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }	
 
-#display {
-	margin-top:30px;
-}
-
 /*.container {
 	width			: 800px;
 	margin-right	: auto;
@@ -66,5 +62,16 @@
 /* CLASS END */
 
 /* ID START */
+#footer {
+	margin 			:	auto;
+	text-align		:	center;
+	width			:	800px;
+	color 			:	#A0A0A0;
+	font-size 		:	10px;
+}
+
+#display {
+	margin-top:30px;
+}
 /* ID END */
 

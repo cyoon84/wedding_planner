@@ -55,4 +55,12 @@
 		return $success;
 	}
 	/* Functions for Log In End */
+
+	/* Printing footer */
+	function print_footer() {
+		$content = "<div id=\"footer\">";
+		$content .= "\n\t\t\tCopyright &copy; 2013 SLCY";
+		$content .= "\n\t\t</div>\n";
+		echo $content;
+	}
 ?>
