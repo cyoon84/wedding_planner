@@ -83,4 +83,18 @@
 
   		return $menu_html;
 	}
+
+	function fillinTable($id) {
+		$sql = "select firstName, lastName, email, plusGuest, isVegetarian from weddingPlanner where reference = '$id' and isAttending = '1' and role = '1'";
+	  	$result = mysql_query($sql);
+
+	  	$html_table_contents = '';
+	  	if ($result) {
+	  		while ($row = mysql_fetch_array($result)) {
+	  			$name = $row['lastName'].",".$row['firstName'];
+	  			$html_table_contents = $html_table_contents."<tr><td>".$name."</td><td>".$row['email']."</td><td>".$row['plusGuest']."</td><td>".$row['isVegetarian']."</td><td></tr>";	  	
+	  		}
+	  	}
+	  	return $html_table_contents;
+	}
 ?>

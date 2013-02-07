@@ -1,9 +1,11 @@
 <?php include('library.php');
-	if (!check_login()) {
+if (!check_login()) {
 	// redirect
 		$loc = 'Location: index.php';
 		header($loc);
-	}
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -49,9 +51,7 @@
 	  </thead>
 	  <tbody>
 	  	<?php
-	  		$sql = "select firstName, lastName, email, plusGuest, isVegetarian where reference = '$id' and isAttending = '1' and role = '1'";
-
-
+	  		echo fillinTable($id);
 
 	  	?>
 	  </tbody>
