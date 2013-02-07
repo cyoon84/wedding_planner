@@ -63,4 +63,18 @@
 		$content .= "\n\t\t</div>\n";
 		echo $content;
 	}
+
+	function render_menu($id) {
+		$menu_html =  "<div class='navbar navbar-inverse'><div class='navbar-inner'><a class='brand' href='#'>Simon and Jenny's Wedding</a><ul class='nav'><li><a href='admin.php'>Front Page</a></li>";
+     
+		if ($id == 'bride') {
+      		$menu_html = $menu_html."<li class='active'><a href='guest_list.php?id=bride'>View Bride's List</a></li><li><a href='guest_list.php?id=groom'>View Groom's List</a></li><li><a href='#'>View No Show List</a></li>";
+      	}
+      	if ($id == 'groom') {
+      		$menu_html = $menu_html."<li><a href='guest_list.php?id=bride'>View Bride's List</a></li><li class='active'><a href='guest_list.php?id=groom'>View Groom's List</a></li><li><a href='#'>View No Show List</a></li>";	
+      	}
+  		$menu_html = $menu_html. "</ul></div>";
+
+  		return $menu_html;
+	}
 ?>
