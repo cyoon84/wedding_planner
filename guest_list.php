@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title><?php echo(TITLE . " :: View Guest Lists") ?></title>
 <meta charset='UTF-8'>
 <link href='css/bootstrap.css' rel='stylesheet'>
 <link href='style.css' rel='stylesheet'>
@@ -17,17 +18,24 @@
 <script src='js/bootstrap.js'></script>
 </head>
 <body>
+<div class='navbar navbar-inverse navbar-fixed-top'>
 <?php
 	$id = $_GET['id'];
 	$menu = render_menu($id);
 	echo $menu;
 ?>
+</div>
 
+<div class="container" style="margin-top:70px">
  <div id="contentArea" class="span12">
 	  <h1>View guest list - <small>for 
 	  	<?php 
-	  		$id = $_GET['id'];
-	  		echo $id;
+	  		if ($id == 'bride') {
+	  			echo BR;
+	  		}
+	  		if ($id == 'groom') {
+	  			echo GR;
+	  		}
 	  	?>
 	  </small></h1>
 
@@ -39,8 +47,16 @@
 	  	<th style="width:20%">Vegetarian?</th>
 
 	  </thead>
-	  </tbody>
+	  <tbody>
+	  	<?php
+	  		$sql = "select firstName, lastName, email, plusGuest, isVegetarian where reference = '$id' and isAttending = '1' and role = '1'";
 
+
+
+	  	?>
+	  </tbody>
+	</table>
+</div>
 </div>
 </body>
 </html>

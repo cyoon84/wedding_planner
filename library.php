@@ -8,6 +8,8 @@
 	mysql_select_db($db_name) or die("There was an error in selecting the database.");
 	session_start();
 
+	
+
 	define('TITLE', 'Simon and Jenny\'s Wedding');
 	define('LOGIN', 'Log In');
 	define('RSVP', 'RSVP');
@@ -17,8 +19,7 @@
 	define('GR', 'Groom');
 	define('BR', 'Bride');
 	define('NOTATND', 'Not Attending');
-	define('REENTER', 'Invalid email address or password');
-	define('LOGINHEADING', 'RSVP');
+	define('ADMIN', 'Admin Page');
 
 	/* Functions for Log In Start */
 
@@ -66,8 +67,9 @@
 		echo $content;
 	}
 
+	/* rendering menu at admin page */
 	function render_menu($id) {
-		$menu_html =  "<div class='navbar navbar-inverse'><div class='navbar-inner'><a class='brand' href='#'>Simon and Jenny's Wedding</a><ul class='nav'><li><a href='admin.php'>Front Page</a></li>";
+		$menu_html =  "<div class='navbar-inner'><div class='container'><a class='brand' href='admin.php'>Simon and Jenny's Wedding</a><ul class='nav'><li><a href='admin.php'>Front Page</a></li>";
      
 		if ($id == 'bride') {
       		$menu_html = $menu_html."<li class='active'><a href='guest_list.php?id=bride'>View Bride's List</a></li><li><a href='guest_list.php?id=groom'>View Groom's List</a></li><li><a href='#'>View No Show List</a></li>";
@@ -75,7 +77,9 @@
       	if ($id == 'groom') {
       		$menu_html = $menu_html."<li><a href='guest_list.php?id=bride'>View Bride's List</a></li><li class='active'><a href='guest_list.php?id=groom'>View Groom's List</a></li><li><a href='#'>View No Show List</a></li>";	
       	}
-  		$menu_html = $menu_html. "</ul></div>";
+  		$menu_html = $menu_html. "</ul>";
+
+  		$menu_html = $menu_html."<ul class='nav pull-right'><li><a href='logout.php'><i class='icon-off'></i>&nbsp;Logout</a></li></ul></div></div>";
 
   		return $menu_html;
 	}
