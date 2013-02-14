@@ -1,4 +1,6 @@
-<?php include('library.php'); ?>
+<?php include('library.php'); 
+$userId = $_SESSION["uname"];
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -28,14 +30,11 @@
 	</head>
 	<body>
 		<div class="container">
+			<?php $row = retrieve_guest($userId); ?>
 			<form class="form-signin2" action="save.php" method="post">
     			<div class="row">
-					<div class="span3 right">First Name</div>
-					<div class="span5 left"><input type="text" class="input-block-level" placeholder="First Name" name="fname" /></div>
-				</div>
-				<div class="row">
-					<div class="span3 right">Last Name</div>
-					<div class="span5 left"><input type="text" class="input-block-level" placeholder="Last Name" name="lname" /></div>
+					<div class="span3 right">Guest Name</div>
+					<div class="span5 left"><?php echo $row["lastName"] . ", " . $row["firstName"] ?></div>
 				</div>
 				<div class="row">
 					<div class="span3 right">E-Mail Address</div>

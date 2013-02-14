@@ -147,4 +147,34 @@
 		else
 			return NULL;
 	}
+
+	/*
+	 * Retrieves whether the user is given permission to bring guest or not.
+	 */
+	function retrieve_bringGuest($userId) {
+
+		$qry = sprintf("SELECT bringGuest FROM guestList WHERE refId='%s'", mysql_real_escape_string($userId));
+	  	$qry_res = mysql_query($qry) or die ("There was an error selecting a row from user table.<br />".mysql_error());
+	  	$res = NULL;
+
+	  	// retrieve the user's bringGuest result and return
+	  	if (mysql_num_rows($qry_res) == 1) {
+	  		$row = mysql_fetch_array($qry_res);
+	  		$res = $row["bringGuest"];
+	  	}
+	  	return $res;
+	}
+
+	function retrieve_guest($userId) {
+		$qry = sprintf("SELECT firstName, lastName, phone, email, attending, r.bringGuest, guestFName, guestLName, vegetarian, guestVeg FROM guestList LEFT JOIN guestResponse r USING (refId) WHERE refId='%s'", mysql_real_escape_string($userId));
+		$qry_res = mysql_query($qry) or die ("There was an error selecting a row from user table.<br />".mysql_error());
+
+	  	// retrieve the user's bringGuest result and return
+	  	if (mysql_num_rows($qry_res) == 1) {
+	  		$row = mysql_fetch_array($qry_res);
+	  		return $row;
+	  	} else {
+	  		return NULL;
+	  	}
+	}
 ?>
