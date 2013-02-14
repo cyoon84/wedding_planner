@@ -91,8 +91,13 @@
 	}
 	
 	function fillinTable($id) {
-		$sql = "select a.firstName, a.lastName, b.phone, b.email, b.attending, b.bringGuest, b.guestFName, b.guestLName, b.vegetarian, b.guestVeg from guestList a inner join guestResponse b on a.refId = b.refId where a.role = '0' and a.guestOf ='$id' and b.attending = '1'";
-	  	
+		if ($id == 'bride' || $id == 'groom') {
+			$sql = "select a.firstName, a.lastName, b.phone, b.email, b.attending, b.bringGuest, b.guestFName, b.guestLName, b.vegetarian, b.guestVeg from guestList a inner join guestResponse b on a.refId = b.refId where a.role = '0' and a.guestOf ='$id' and b.attending = '1'";
+	  	} else {
+	  		if ($id == 'noShow') {
+	  			$sql = "select a.firstName, a.lastName, b.phone, b.email, b.attending, b.bringGuest, b.guestFName, b.guestLName, b.vegetarian, b.guestVeg from guestList a inner join guestResponse b on a.refId = b.refId where a.role = '0' and b.attending = '0'";
+	  		}
+	  	}
 	  	$result = mysql_query($sql);
 	  	$html_table_contents = '';
 	  	if ($result) {
@@ -120,7 +125,13 @@
 	  			} else {
 	  				$guestVegetarian = NO;
 	  			}
-	  			$html_table_contents = $html_table_contents."<tr><td>".$name."</td><td>".$row['email']."</td><td>".$guest."</td><td>".$guest_name."</td><td>".$isVegetarian."</td><td>".$guestVegetarian."</td></tr>";
+	  			if ($id == 'bride' || $id == 'groom') {
+	  				$html_table_contents = $html_table_contents."<tr><td>".$name."</td><td>".$row['email']."</td><td>".$guest."</td><td>".$guest_name."</td><td>".$isVegetarian."</td><td>".$guestVegetarian."</td></tr>";
+	  			} else {
+	  				if ($id == 'noShow') {
+	  					$html_table_contents = $html_table_contents."<tr><td>".$name."</td><td>".$row['email']."</td><td>".$guest."</td><td>".$guest_name."</td><td>".$isVegetarian."</td><td>".$guestVegetarian."</td></tr>";
+	  				}
+	  			}	
 	  		}
 	  	}
 	  	return $html_table_contents;

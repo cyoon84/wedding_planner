@@ -27,7 +27,7 @@ if (!check_login()) {
 	      <li class='active'><a href='admin.php'>Front Page</a></li>
 	      <li><a href='guest_list.php?id=bride'>View Bride's List</a></li>
 	      <li><a href='guest_list.php?id=groom'>View Groom's List</a></li>
-	      <li><a href='#'>View No Show List</a></li>
+	      <li><a href='guest_list.php?id=noShow'>View No Show List</a></li>
 	    </ul>
 	    <ul class='nav pull-right'>
 	    	<li>
