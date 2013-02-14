@@ -18,6 +18,7 @@
 	define('GR', 'Groom');
 	define('BR', 'Bride');
 	define('NOTATND', 'Not Attending');
+	define('NOANSW', 'Not Answered');
 	define('ADMIN', 'Admin Page');
 	define('LOGINHEADING', 'RSVP');
 	define('REENTER', 'Invalid E-Mail Address or password. <br />Please try again.');
@@ -77,13 +78,16 @@
 		$menu_html =  "<div class='navbar-inner'><div class='container'><a class='brand' href='admin.php'>Simon and Jenny's Wedding</a><ul class='nav'><li><a href='admin.php'>Front Page</a></li>";
 
 		if ($id == 'bride') {
-      		$menu_html = $menu_html."<li class='active'><a href='guest_list.php?id=bride'>View Bride's List</a></li><li><a href='guest_list.php?id=groom'>View Groom's List</a></li><li><a href='guest_list.php?id=noShow'>View No Show List</a></li>";
+      		$menu_html = $menu_html."<li class='active'><a href='guest_list.php?id=bride'>View Bride's List</a></li><li><a href='guest_list.php?id=groom'>View Groom's List</a></li><li><a href='guest_list.php?id=noShow'>View No Show List</a></li><li><a href='guest_list.php?id=noAnswer'>View No Answer List</a></li>";
       	}
       	if ($id == 'groom') {
-      		$menu_html = $menu_html."<li><a href='guest_list.php?id=bride'>View Bride's List</a></li><li class='active'><a href='guest_list.php?id=groom'>View Groom's List</a></li><li><a href='guest_list.php?id=noShow'>View No Show List</a></li>";	
+      		$menu_html = $menu_html."<li><a href='guest_list.php?id=bride'>View Bride's List</a></li><li class='active'><a href='guest_list.php?id=groom'>View Groom's List</a></li><li><a href='guest_list.php?id=noShow'>View No Show List</a></li><li><a href='guest_list.php?id=noAnswer'>View No Answer List</a></li>";	
       	}
       	if ($id == 'noShow') {
-      		$menu_html = $menu_html."<li><a href='guest_list.php?id=bride'>View Bride's List</a></li><li><a href='guest_list.php?id=groom'>View Groom's List</a></li><li class='active'><a href='guest_list.php?id=noShow'>View No Show List</a></li>";		
+      		$menu_html = $menu_html."<li><a href='guest_list.php?id=bride'>View Bride's List</a></li><li><a href='guest_list.php?id=groom'>View Groom's List</a></li><li class='active'><a href='guest_list.php?id=noShow'>View No Show List</a></li><li><a href='guest_list.php?id=noAnswer'>View No Answer List</a></li>";		
+      	}
+      	if ($id == 'noAnswer') {
+      		$menu_html = $menu_html."<li><a href='guest_list.php?id=bride'>View Bride's List</a></li><li><a href='guest_list.php?id=groom'>View Groom's List</a></li><li><a href='guest_list.php?id=noShow'>View No Show List</a></li><li class='active'><a href='guest_list.php?id=noAnswer'>View No Answer List</a></li>";		
       	}
   		$menu_html = $menu_html. "</ul>";
   		$menu_html = $menu_html."<ul class='nav pull-right'><li><a href='logout.php'><i class='icon-off'></i>&nbsp;Logout</a></li></ul></div></div>";
@@ -96,6 +100,9 @@
 	  	} else {
 	  		if ($id == 'noShow') {
 	  			$sql = "select a.firstName, a.lastName, b.phone, b.email, b.attending, b.bringGuest, b.guestFName, b.guestLName, b.vegetarian, b.guestVeg from guestList a inner join guestResponse b on a.refId = b.refId where a.role = '0' and b.attending = '0'";
+	  		} 
+	  		if ($id == 'noAnswer') {
+	  			$sql = "SELECT firstName, lastName FROM guestList WHERE refId NOT IN (SELECT refId FROM guestResponse)";
 	  		}
 	  	}
 	  	$result = mysql_query($sql);
@@ -129,8 +136,12 @@
 	  				$html_table_contents = $html_table_contents."<tr><td>".$name."</td><td>".$row['email']."</td><td>".$guest."</td><td>".$guest_name."</td><td>".$isVegetarian."</td><td>".$guestVegetarian."</td></tr>";
 	  			} else {
 	  				if ($id == 'noShow') {
-	  					$html_table_contents = $html_table_contents."<tr><td>".$name."</td><td>".$row['email']."</td><td>".$guest."</td><td>".$guest_name."</td><td>".$isVegetarian."</td><td>".$guestVegetarian."</td></tr>";
+	  					$html_table_contents = $html_table_contents."<tr><td>".$name."</td><td>".$row['email']."</td></tr>";
 	  				}
+	  				if ($id == 'noAnswer') {
+	  					$html_table_contents = $html_table_contents."<tr><td>".$name."</td></tr>";
+	  				}
+
 	  			}	
 	  		}
 	  	}

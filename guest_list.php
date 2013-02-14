@@ -41,6 +41,9 @@ if (!check_login()) {
 	  		if ($id == 'noShow') {
 	  			echo NOTATND;
 	  		}
+	  		if ($id == 'noAnswer') {
+	  			echo NOANSW;
+	  		}
 	  	?>
 	  </small></h1>
 
@@ -53,6 +56,9 @@ if (!check_login()) {
 	  		} else {
 	  			if ($id == 'noShow') {
 	  				echo "<th style='width:50%'>Name</th><th style='width:50%'>E-mail</th>";
+	  			}
+	  			if ($id == 'noAnswer') {
+	  				echo "<th style='width:100%'>Name</th>";
 	  			}
 	  		}
 

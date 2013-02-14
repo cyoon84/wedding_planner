@@ -28,6 +28,7 @@ if (!check_login()) {
 	      <li><a href='guest_list.php?id=bride'>View Bride's List</a></li>
 	      <li><a href='guest_list.php?id=groom'>View Groom's List</a></li>
 	      <li><a href='guest_list.php?id=noShow'>View No Show List</a></li>
+	      <li><a href='guest_list.php?id=noAnswer'>View No Answered List</a></li>
 	    </ul>
 	    <ul class='nav pull-right'>
 	    	<li>
