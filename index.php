@@ -5,9 +5,9 @@ if ($_POST) {
 	if($login_result = login_to_db($_POST["uname"], $_POST["pw"]))
 		mysql_close($db_con);
 }
-if ($login_result && !$_SESSION["role"])
+if ($login_result && $_SESSION["role"] == 1)
 	header("Location: admin.php");
-else if ($login_result && $_SESSION["role"])
+else if ($login_result && $_SESSION["role"] == 0)
 	header("Location: guest.php");
 else {
 ?>
@@ -49,8 +49,7 @@ else {
 				<input type="text" class="input-block-level" placeholder="Email address" name="uname" />
 				<input type="password" class="input-block-level" placeholder="Password" name="pw" />
 				<div class="btn-group">
-					<button class="btn btn-large btn-primary" type="submit">Sign in</button>&nbsp;&nbsp;
-					<a href="guest.php" class="btn btn-large btn-primary">Create New</a>
+					<button class="btn btn-large btn-primary" type="submit">Sign in</button>
 				</div>
 				<?php if (!$login_result && $_POST) { ?>
 				<div>&nbsp;</div>

@@ -40,17 +40,17 @@
 		// extracts a row from users table that matches user name from the input.
 		// the input has been securely enhanced by using mysql_real_escape_string()
 
-		$qry = sprintf("SELECT password, role FROM weddingPlanner WHERE email='%s'", mysql_real_escape_string($uname));
+		$qry = sprintf("SELECT password, role FROM guestList WHERE refId='%s'", mysql_real_escape_string($uname));
 		$qry_res = mysql_query($qry) or die ("There was an error selecting a row from user table.<br />".mysql_error());
 
 		// if there is a row extracted, there is a user id that matches the input by the user
 		if (mysql_num_rows($qry_res) == 1) {
 			$row = mysql_fetch_array($qry_res);
 			// holds values from the extracted row
-			$encrypted_pw = $row[0];
-			$role = $row[1];
+			$encrypted_pw = $row["password"];
+			$role = $row["role"];
 			// compare the encrypted password
-			if ($encrypted_pw == $pword) {
+			if ($encrypted_pw == md5($pword)) {
 				$success = true;
 				// sets the attempt to true, and stores session values accordingly
 				setcookie ("PHPSESSID", session_id(), time() + 600);
