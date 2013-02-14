@@ -49,7 +49,7 @@ else {
 				<input type="text" class="input-block-level" placeholder="Email address" name="uname" />
 				<input type="password" class="input-block-level" placeholder="Password" name="pw" />
 				<div class="btn-group">
-					<button class="btn btn-large btn-primary" type="submit">Sign in</button>
+					<button class="btn btn-large btn-primary" type="submit"><i class="icon-heart icon-white"></i> Sign in</button>
 				</div>
 				<?php if (!$login_result && $_POST) { ?>
 				<div>&nbsp;</div>
