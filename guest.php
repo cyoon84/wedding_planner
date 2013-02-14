@@ -34,23 +34,15 @@ $userId = $_SESSION["uname"];
 			<form class="form-signin2" action="save.php" method="post">
     			<div class="row">
 					<div class="span3 right">Guest Name</div>
-					<div class="span5 left"><?php echo $row["lastName"] . ", " . $row["firstName"] ?></div>
+					<div class="span5 left"><p class="input-block-level"><?php echo $row["lastName"] . ", " . $row["firstName"] ?></p></div>
 				</div>
 				<div class="row">
 					<div class="span3 right">E-Mail Address</div>
-					<div class="span5 left"><input type="text" class="input-block-level" placeholder="E-Mail Address" name="emailadd" /></div>
-				</div>
-				<div class="row">
-					<div class="span3 right">Password</div>
-					<div class="span5 left"><input type="password" class="input-block-level" placeholder="password" name="pwd" /></div>
-				</div>
-				<div class="row">
-					<div class="span3 right">Confirm Password</div>
-					<div class="span5 left"><input type="password" class="input-block-level" placeholder="" name="cpwd" /></div>
+					<div class="span5 left"><input type="text" class="input-block-level" placeholder="E-Mail Address" name="emailadd" <?php if ($row["email"] != NULL) { ?> value="<?php echo $row["email"];?>"<?php } ?>/></div>
 				</div>
 				<div class="row">
 					<div class="span3 right">Phone Number</div>
-					<div class="span5 left"><input type="text" class="input-block-level" placeholder="First Name" name="phone" /></div>
+					<div class="span5 left"><input type="text" class="input-block-level" placeholder="Phone Number (xxx-xxx-xxxx)" name="phone" <?php if ($row["phone"] != NULL) { ?> value="<?php echo $row["phone"];?>"<?php } ?>/></div>
 				</div>
 				<div class="row">
 					<div class="span3 right">Attending?</div>
