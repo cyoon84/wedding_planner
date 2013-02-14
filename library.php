@@ -102,7 +102,7 @@
 	  			$sql = "select a.firstName, a.lastName, b.phone, b.email, b.attending, b.bringGuest, b.guestFName, b.guestLName, b.vegetarian, b.guestVeg from guestList a inner join guestResponse b on a.refId = b.refId where a.role = '0' and b.attending = '0'";
 	  		} 
 	  		if ($id == 'noAnswer') {
-	  			$sql = "SELECT firstName, lastName FROM guestList WHERE refId NOT IN (SELECT refId FROM guestResponse)";
+	  			$sql = "SELECT firstName, lastName FROM guestList WHERE role=0 AND refId NOT IN (SELECT refId FROM guestResponse)";
 	  		}
 	  	}
 	  	$result = mysql_query($sql);

@@ -38,18 +38,18 @@ $userId = $_SESSION["uname"];
 				</div>
 				<div class="row">
 					<div class="span3 right">E-Mail Address</div>
-					<div class="span5 left"><input type="text" class="input-block-level" placeholder="E-Mail Address" name="emailadd" <?php if ($row["email"] != NULL) { ?> value="<?php echo $row["email"];?>"<?php } ?>/></div>
+					<div class="span5 left"><input type="text" class="input-block-level" placeholder="E-Mail Address" name="emailadd" <?php if ($row["email"]) { ?> value="<?php echo $row["email"];?>"<?php } ?>/></div>
 				</div>
 				<div class="row">
 					<div class="span3 right">Phone Number</div>
-					<div class="span5 left"><input type="text" class="input-block-level" placeholder="Phone Number (xxx-xxx-xxxx)" name="phone" <?php if ($row["phone"] != NULL) { ?> value="<?php echo $row["phone"];?>"<?php } ?>/></div>
+					<div class="span5 left"><input type="text" class="input-block-level" placeholder="Phone Number (xxx-xxx-xxxx)" name="phone" <?php if ($row["phone"]) { ?> value="<?php echo $row["phone"];?>"<?php } ?>/></div>
 				</div>
 				<div class="row">
 					<div class="span3 right">Attending?</div>
 					<div class="span5 left">
 						<select id="attending" class="span2">
-							<option value="1">Yes</option>
-							<option value="0">No</option>
+							<option value="1" <?php if ($row["attending"] != NULL && $row["attending"] == 1) { ?>selected="selected"<?php } ?>>Yes</option>
+							<option value="0" <?php if ($row["attending"] != NULL && $row["attending"] == 0) { ?>selected="selected"<?php } ?>>No</option>
 						</select>
 					</div>
 				</div>
@@ -72,18 +72,9 @@ $userId = $_SESSION["uname"];
 					</div>
 				</div>
 				<div class="row">
-					<div class="span3 right">Guest of</div>
-					<div class="span5 left">						
-						<select id="reference" class="span2">
-							<option value="groom">Groom</option>
-							<option value="bride">Bride</option>
-						</select>
-					</div>
-				</div>
-				<div class="row">
 					<div class="btn-group">
-						<button class="btn btn-large btn-primary" type="submit">Submit</button>&nbsp;&nbsp;
-						<a href="index.php" class="btn btn-largbtn-primary">Cancel</a>
+						<button class="btn btn-large btn-primary" type="submit">Save</button>&nbsp;&nbsp;
+						<button class="btn btn-large btn-primary" type="submit" formaction="logout.php">Cancel</button>
 					</div>
 				</div>
 			</form>
