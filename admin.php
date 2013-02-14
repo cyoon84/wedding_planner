@@ -20,23 +20,11 @@ if (!check_login()) {
 </head>
 <body>
 <div class='navbar navbar-inverse navbar-fixed-top'>
-  <div class='navbar-inner'>
-  	<div class="container">
-	    <a class='brand' href='admin.php'>Simon and Jenny's Wedding</a>
-	    <ul class='nav'>
-	      <li class='active'><a href='admin.php'>Front Page</a></li>
-	      <li><a href='guest_list.php?id=bride'>View Bride's List</a></li>
-	      <li><a href='guest_list.php?id=groom'>View Groom's List</a></li>
-	      <li><a href='guest_list.php?id=noShow'>View No Show List</a></li>
-	      <li><a href='guest_list.php?id=noAnswer'>View No Answered List</a></li>
-	    </ul>
-	    <ul class='nav pull-right'>
-	    	<li>
-				<a href='logout.php'><i class="icon-off"></i>&nbsp;Logout</a>
-	    	</li>
-	    </ul>
-	</div>
-   </div>
+<?php
+	$id = $_GET['id'];
+	$menu = render_menu($id);
+	echo $menu;
+?>
  </div>
  <div class="container"  style="margin-top:80px">
 	<div class="hero-unit span9">
