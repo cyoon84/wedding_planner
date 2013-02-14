@@ -91,28 +91,36 @@
 	}
 	
 	function fillinTable($id) {
-		$sql = "select firstName, lastName, email, plusGuest, isVegetarian from weddingPlanner where reference = '$id' and isAttending = '1' and role = '1'";
+		$sql = "select a.firstName, a.lastName, b.phone, b.email, b.attending, b.bringGuest, b.guestFName, b.guestLName, b.vegetarian, b.guestVeg from guestList a inner join guestResponse b on a.refId = b.refId where a.role = '0' and a.guestOf ='$id' and b.attending = '1'";
+	  	
 	  	$result = mysql_query($sql);
 	  	$html_table_contents = '';
 	  	if ($result) {
 	  		while ($row = mysql_fetch_array($result)) {
 	  			$name = $row['lastName'].",".$row['firstName'];
+	  			$guest_name = $row['guestLName'].",".$row['guestFName'];
 	  			$guest = '';
 	  			$isVegetarian = '';
+	  			$guestVegetarian = '';
 
-	  			if ($row['plusGuest'] == '1') {
+	  			if ($row['bringGuest'] == '1') {
 	  				$guest = YES;
 	  			} else {
 	  				$guest = NO;
 	  			}
 
-	  			if ($row['isVegetarian'] == '1') {
+	  			if ($row['vegetarian'] == '1') {
 	  				$isVegetarian = YES;
 	  			} else {
 	  				$isVegetarian = NO;
 	  			}
 
-	  			$html_table_contents = $html_table_contents."<tr><td>".$name."</td><td>".$row['email']."</td><td>".$guest."</td><td>".$isVegetarian."</td><td></tr>";
+				if ($row['guestVeg'] == '1') {
+	  				$guestVegetarian = YES;
+	  			} else {
+	  				$guestVegetarian = NO;
+	  			}
+	  			$html_table_contents = $html_table_contents."<tr><td>".$name."</td><td>".$row['email']."</td><td>".$guest."</td><td>".$guest_name."</td><td>".$isVegetarian."</td><td>".$guestVegetarian."</td></tr>";
 	  		}
 	  	}
 	  	return $html_table_contents;

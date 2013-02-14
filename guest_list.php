@@ -46,10 +46,12 @@ if (!check_login()) {
 
 	  <table class="table" id="guestTable">
 	  <thead>
-	  	<th style="width:30%">Name</th>
-	  	<th style="width:30%">E-mail</th>
-	  	<th style="width:20%">Bringing Guest?</th>
-	  	<th style="width:20%">Vegetarian?</th>
+	  	<th style="width:20%">Name</th>
+	  	<th style="width:20%">E-mail</th>
+	  	<th style="width:10%">Guest?</th>
+	  	<th style="width:20%">Guest Name</th>
+	  	<th style="width:15%">Vegetarian?</th>
+	  	<th style="width:15%">Guest Vegetarian?</th>
 
 	  </thead>
 	  <tbody>
