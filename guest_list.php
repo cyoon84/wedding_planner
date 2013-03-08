@@ -52,13 +52,13 @@ if (!check_login()) {
 	  <thead>
 	  	<?php
 	  		if ($id == 'bride' || $id == 'groom') {
-				echo "<th style='width:20%'>Name</th><th style='width:20%'>E-mail</th><th style='width:10%'>Guest?</th><th style='width:20%'>Guest Name</th><th style='width:15%'>Vegetarian?</th><th style='width:15%'>Guest Vegetarian?</th>";  			
+				echo "<th style='width:10%'>Reference ID</th><th style='width:20%'>Name</th><th style='width:25%'>E-mail</th><th style='width:5%'>Vegetarian</th><th style='width:10%'>Bringing Guest</th><th style='width:20%'>Guest Name</th><th style='width:10%'>Guest Vegetarian</th>";  			
 	  		} else {
 	  			if ($id == 'noShow') {
-	  				echo "<th style='width:50%'>Name</th><th style='width:50%'>E-mail</th>";
+	  				echo "<th style='width:10%'>Reference ID</th><th style='width:40%'>Name</th><th style='width:50%'>E-mail</th>";
 	  			}
 	  			if ($id == 'noAnswer') {
-	  				echo "<th style='width:100%'>Name</th>";
+	  				echo "<th style='width:10%'>Reference ID</th><th style='width:40%'>Name</th><th style='width:50%'>Guest Of</th>";
 	  			}
 	  		}
 

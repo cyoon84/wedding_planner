@@ -75,7 +75,7 @@
 
 	/* rendering menu at admin page */
 	function render_menu($id) {
-		$menu_html =  "<div class='navbar-inner'><div class='container'><a class='brand' href='admin.php'>Simon and Jenny's Wedding</a><ul class='nav'><li><a href='admin.php'><i class='icon-home'></i>&nbsp;Front Page</a></li>";
+		$menu_html =  "<div class='navbar-inner'><div class='container'><a class='brand' href='admin.php'>Simon and Jenny's Wedding</a><ul class='nav'>";
 
   		$menu_html = $menu_html. 
 
@@ -96,22 +96,24 @@
 	
 	function fillinTable($id) {
 		if ($id == 'bride' || $id == 'groom') {
-			$sql = "select a.firstName, a.lastName, b.phone, b.email, b.attending, b.bringGuest, b.guestFName, b.guestLName, b.vegetarian, b.guestVeg from guestList a inner join guestResponse b on a.refId = b.refId where a.role = '0' and a.guestOf ='$id' and b.attending = '1'";
+			$sql = "select a.refId, a.firstName, a.lastName, b.phone, b.email, b.attending, b.bringGuest, b.guestName, b.vegetarian, b.guestVeg from guestList a inner join guestResponse b on a.refId = b.refId where a.role = '0' and a.guestOf ='$id' and b.attending = '1'";
 	  	} else {
 	  		if ($id == 'noShow') {
-	  			$sql = "select a.firstName, a.lastName, b.phone, b.email, b.attending, b.bringGuest, b.guestFName, b.guestLName, b.vegetarian, b.guestVeg from guestList a inner join guestResponse b on a.refId = b.refId where a.role = '0' and b.attending = '0'";
+	  			$sql = "select a.refId, a.firstName, a.lastName, b.phone, b.email, b.attending, b.bringGuest, b.guestName, b.vegetarian, b.guestVeg from guestList a inner join guestResponse b on a.refId = b.refId where a.role = '0' and b.attending = '0'";
 	  		} 
 	  		if ($id == 'noAnswer') {
-	  			$sql = "SELECT firstName, lastName FROM guestList WHERE role=0 AND refId NOT IN (SELECT refId FROM guestResponse)";
+	  			$sql = "SELECT refId, firstName, lastName, guestOf FROM guestList WHERE role=0 AND refId NOT IN (SELECT refId FROM guestResponse)";
 	  		}
 	  	}
 	  	$result = mysql_query($sql);
 	  	$html_table_contents = '';
 	  	if ($result) {
 	  		while ($row = mysql_fetch_array($result)) {
-	  			$name = $row['lastName'].",".$row['firstName'];
-	  			$guest_name = $row['guestLName'].",".$row['guestFName'];
+	  			$refId = $row['refId'];
+	  			$name = $row['lastName'].", ".$row['firstName'];
+	  			$guest_name = $row['guestName'];
 	  			$guest = '';
+	  			$guestOf = $row['guestOf'];
 	  			$isVegetarian = '';
 	  			$guestVegetarian = '';
 
@@ -133,13 +135,13 @@
 	  				$guestVegetarian = NO;
 	  			}
 	  			if ($id == 'bride' || $id == 'groom') {
-	  				$html_table_contents = $html_table_contents."<tr><td>".$name."</td><td>".$row['email']."</td><td>".$guest."</td><td>".$guest_name."</td><td>".$isVegetarian."</td><td>".$guestVegetarian."</td></tr>";
+	  				$html_table_contents = $html_table_contents."<tr><td>".$refId."</td><td>".$name."</td><td>".$row['email']."</td><td>".$isVegetarian."</td><td>".$guest."</td><td>".$guest_name."</td><td>".$guestVegetarian."</td></tr>";
 	  			} else {
 	  				if ($id == 'noShow') {
-	  					$html_table_contents = $html_table_contents."<tr><td>".$name."</td><td>".$row['email']."</td></tr>";
+	  					$html_table_contents = $html_table_contents."<tr><td>".$refId."</td><td>".$name."</td><td>".$row['email']."</td></tr>";
 	  				}
 	  				if ($id == 'noAnswer') {
-	  					$html_table_contents = $html_table_contents."<tr><td>".$name."</td></tr>";
+	  					$html_table_contents = $html_table_contents."<tr><td>".$refId."</td><td>".$name."</td><td>".$guestOf."</td></tr>";
 	  				}
 
 	  			}	
@@ -151,17 +153,24 @@
 	function validate() {
 		$content = "";
 		$flag = FALSE;
-		if (trim($_POST["fname"]) == "" || trim($_POST["lname"]) == "" || trim($_POST["emailadd"]) == "" || 
-			trim($_POST["pwd"]) == "" || trim($_POST["cpwd"]) == "" || trim($_POST["phone"]) == "") {
-			$content .= "Please fill in all fields.<br />";
+		if (trim($_POST["emailadd"]) == "") {
+			$content .= "Please enter email address.";
 			$flag = TRUE;
 		}
-		if ($_POST["pwd"] != $_POST["cpwd"]) {
-			$content .= "Please confirm your password correctly.<br />";
+		if (trim($_POST["phone"]) == "") {
+			$content .= "Please enter phone number.";
+			$flag = TRUE;
+		}
+		if ($_POST["attending"] == 1 && $_POST["guest"] == 1 && trim($_POST["guestName"]) == "") {
+			$content .= "Please fill in the name of the companion.";
+			$flag = TRUE;
+		}
+		if ($_POST["guest"] == 0 &&  trim($_POST["guestName"]) != "") {
+			$content .= "You specified a guest name when you have selected you will not be bringing any.";
 			$flag = TRUE;
 		}
 		if (!filter_var($_POST["emailadd"], FILTER_VALIDATE_EMAIL)) {
-			$content .= "Please enter a valid email address.<br />";
+			$content .= "Please enter a valid email address.";
 			$flag = TRUE;
 		}
 		if ($flag)
@@ -188,7 +197,7 @@
 	}
 
 	function retrieve_guest($userId) {
-		$qry = sprintf("SELECT firstName, lastName, phone, email, attending, r.bringGuest, guestFName, guestLName, vegetarian, guestVeg FROM guestList LEFT JOIN guestResponse r USING (refId) WHERE refId='%s'", mysql_real_escape_string($userId));
+		$qry = sprintf("SELECT refId, firstName, lastName, phone, email, attending, r.bringGuest, guestName, vegetarian, guestVeg FROM guestList LEFT JOIN guestResponse r USING (refId) WHERE refId='%s'", mysql_real_escape_string($userId));
 		$qry_res = mysql_query($qry) or die ("There was an error selecting a row from user table.<br />".mysql_error());
 
 	  	// retrieve the user's bringGuest result and return

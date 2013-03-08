@@ -14,6 +14,7 @@ $userId = $_SESSION["uname"];
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/bootstrap-responsive.css" rel="stylesheet">
 		<script src="http://code.jquery.com/jquery-1.8.0.js"></script>
+		<script src="js/weddingPlanner.js"></script>
 		<link href="style.css" rel="stylesheet">
 
 	    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -38,16 +39,16 @@ $userId = $_SESSION["uname"];
 				</div>
 				<div class="row">
 					<div class="span3 right">E-Mail Address</div>
-					<div class="span5 left"><input type="text" class="input-block-level" placeholder="E-Mail Address" name="emailadd" <?php if ($row["email"]) { ?> value="<?php echo $row["email"];?>"<?php } ?>/></div>
+					<div class="span4 left"><input type="text" class="input-block-level" placeholder="E-Mail Address" name="emailadd" <?php if ($row["email"]) { ?> value="<?php echo $row["email"];?>"<?php } ?>/></div>
 				</div>
 				<div class="row">
 					<div class="span3 right">Phone Number</div>
-					<div class="span5 left"><input type="text" class="input-block-level" placeholder="Phone Number (xxx-xxx-xxxx)" name="phone" <?php if ($row["phone"]) { ?> value="<?php echo $row["phone"];?>"<?php } ?>/></div>
+					<div class="span4 left"><input type="text" class="input-block-level" placeholder="Phone Number (xxx-xxx-xxxx)" name="phone" <?php if ($row["phone"]) { ?> value="<?php echo $row["phone"];?>"<?php } ?>/></div>
 				</div>
 				<div class="row">
 					<div class="span3 right">Attending?</div>
 					<div class="span5 left">
-						<select id="attending" class="span2">
+						<select id="attending" name="attending" class="span2">
 							<option value="1" <?php if ($row["attending"] != NULL && $row["attending"] == 1) { ?>selected="selected"<?php } ?>>Yes</option>
 							<option value="0" <?php if ($row["attending"] != NULL && $row["attending"] == 0) { ?>selected="selected"<?php } ?>>No</option>
 						</select>
@@ -56,25 +57,49 @@ $userId = $_SESSION["uname"];
 				<div class="row">
 					<div class="span3 right">Vegetarian?</div>
 					<div class="span5 left">						
-						<select id="vegetarian" class="span2">
-							<option value="1">Yes</option>
-							<option value="0">No</option>
+						<select id="vegetarian" name="vegetarian" class="span2">
+							<option value="1" <?php if ($row["vegetarian"] != NULL && $row["vegetarian"] == 1) { ?>selected="selected"<?php } ?>>Yes</option>
+							<option value="0" <?php if ($row["vegetarian"] != NULL && $row["vegetarian"] == 0) { ?>selected="selected"<?php } ?>>No</option>
 						</select>
 					</div>
 				</div>
+				<?php $bringGuest = retrieve_bringGuest($userId);
+				if($bringGuest[0] == 1) { ?>
 				<div class="row">
-					<div class="span3 right">Bringing Guest?</div>
+					<div class="span3 right">Bringing Companion?</div>
 					<div class="span5 left">
-						<select id="guest" class="span2">
-							<option value="1">Yes</option>
-							<option value="0">No</option>
+						<select id="guest" name="guest" class="span2">
+							<option value="1" <?php if ($row["r.bringGuest"] != NULL && $row["r.bringGuest"] == 1) { ?>selected="selected"<?php } ?>>Yes</option>
+							<option value="0" <?php if ($row["r.bringGuest"] != NULL && $row["r.bringGuest"] == 0) { ?>selected="selected"<?php } ?>>No</option>
 						</select>
 					</div>
 				</div>
 				<div class="row">
-					<div class="btn-group">
+					<div class="span3 right">Name of the Companion</div>
+					<div class="span4 left">
+						<input type="text" class="input-block-level" placeholder="John Doe" name="guestName" <?php if ($row["guestName"]) { ?> value="<?php echo $row["guestName"];?>"<?php } ?>/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span3 right">Is Your Companion Vegetarian?</div>
+					<div class="span5 left">						
+						<select id="guestVeg" name="guestVeg" class="span2">
+							<option value="1" <?php if ($row["guestVeg"] != NULL && $row["guestVeg"] == 1) { ?>selected="selected"<?php } ?>>Yes</option>
+							<option value="0" <?php if ($row["guestVeg"] != NULL && $row["guestVeg"] == 0) { ?>selected="selected"<?php } ?>>No</option>
+						</select>
+					</div>
+				</div>
+				<?php } ?>
+				<div class="row">
+					<div class="span3 right">&nbsp;</div>
+					<div class="span5 left btn-group">
 						<button class="btn btn-large btn-primary" type="submit">Save</button>&nbsp;&nbsp;
 						<button class="btn btn-large btn-primary" type="submit" formaction="logout.php">Cancel</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span9">
+						Message goes here.
 					</div>
 				</div>
 			</form>
